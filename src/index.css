@@ -10,3 +10,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.skeleton {
+  animation: pulse 1.2s ease-in-out infinite;
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 37%, #2a2a2a 63%);
+  background-size: 400% 100%;
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 100% 0
+  }
+
+  100% {
+    background-position: 0 0
+  }
+}
