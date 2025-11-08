@@ -50,3 +50,16 @@ export async function getMovieCredits(id) {
         };
     }
 }
+
+export async function searchMovies(query) {
+    try {
+        const res = await tmdb.get(`/search/movie`, {params : {query}});
+        return { data: res.data.results, error:null };
+    } catch (err) {
+        return {
+            data:null,
+            error: err.response?.data?.status_message || "Erreur réseau"
+        };
+    }
+}
+

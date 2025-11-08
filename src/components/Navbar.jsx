@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
 import { useState } from "react";
+import SearchBar from "./SearchBar";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
@@ -33,9 +34,9 @@ export default function Navbar() {
                         </NavLink>
                     ))}
 
-                    <button className="hover:text-red-500 transition text-white">
-                        <Search size={20} />
-                    </button>
+                    <div className="hidden md:block w-64">
+                        <SearchBar />
+                    </div>
                 </nav>
 
                 {/* Mobile Menu Button*/}
