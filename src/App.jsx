@@ -3,22 +3,21 @@ import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import MovieDetails from "./pages/MovieDetails";
 import Search from "./pages/Search";
+import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
     <Router>
-      <nav className="p-4 bg-gray-900 text-white flex gap-4">
-        <Link to="/">Accueil</Link>
-        <Link to="/movies">Films</Link>
-        <Link to="/search">Recherche</Link>
-      </nav>
+      <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movie/:id" element={<MovieDetails />} />
-        <Route path="/search" element={<Search />} />
-      </Routes>
+      <div className="pt-20">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
