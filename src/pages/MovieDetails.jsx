@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import { getMovieDetails, getMovieVideos, getMovieCredits } from "../services/movies.service";
+import { getMovieDetails, getMovieVideos, getMovieCredits, getSimilarMovies } from "../services/movies.service";
+import { Link } from "react-router-dom";
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -15,6 +16,8 @@ export default function MovieDetails() {
   const { data: videos } = useFetch(() => getMovieVideos(id), [id]);
 
   const { data: cast } = useFetch(() => getMovieCredits(id), [id]);
+
+  const { data: similar } = useFetch(() => getSimilarMovies(id), [id]);
 
   if (loading) return <div className="text-white p-6">⏳ Chargement...</div>;
   if (error) return <div className="text-red-500 p-6">❌ {error}</div>;
@@ -101,6 +104,31 @@ export default function MovieDetails() {
                     <p className="text-xs text-gray-400 truncate">{actor.character}</p>
                   </div>
                 ))}
+            </div>
+          </div>
+        )}
+
+        {similar && similar.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold mb-4">Films Similaires 🎞️</h2>
+
+            <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
+              {similar
+                .filter(m => m.poster_path)
+                .slice(0, 12)
+                .map(m => (
+                  <Link to={`/movie/${m.id}`} key={m.id} className="w-28 flex-shrink-0">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200${m.poster_path}`}
+                      alt={m.title}
+                      className="rounded-lg shadow-md hover:scale-105 transition"
+                    />
+                    <p className="text-xs text-gray-300 mt-1 text-center truncate">
+                      {m.title}
+                    </p>
+                  </Link>
+                ))
+              }
             </div>
           </div>
         )}

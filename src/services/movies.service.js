@@ -63,3 +63,14 @@ export async function searchMovies(query) {
     }
 }
 
+export async function getSimilarMovies(id) {
+    try {
+        const res = await tmdb.get(`/movie/${id}/similar`);
+        return { data: res.data.results, error:null};
+    } catch (err) {
+        return {
+            data: null,
+            error: err.response?.data?.status_message || "Erreur réseau"
+        };
+    }
+}
