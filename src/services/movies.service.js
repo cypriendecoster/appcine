@@ -74,3 +74,36 @@ export async function getSimilarMovies(id) {
         };
     }
 }
+
+export async function advancedSearch({ query, year, genre, rating }) {
+  try {
+    const res = await tmdb.get(`/discover/movie`, {
+      params: {
+        query: query || undefined,
+        primary_release_year: year || undefined,
+        with_genres: genre || undefined,
+        'vote_average.gte': rating || undefined,
+        sort_by: "popularity.desc",
+      },
+    });
+
+    return { data: res.data.results, error: null };
+  } catch (err) {
+    return {
+      data: null,
+      error: err.response?.data?.status_message || "Erreur réseau",
+    };
+  }
+}
+
+export async function getGenres() {
+  try {
+    const res = await tmdb.get(`/genre/movie/list`);
+    return { data: res.data.genres, error: null };
+  } catch (err) {
+    return {
+      data: null,
+      error: err.response?.data?.status_message || "Erreur réseau",
+    };
+  }
+}

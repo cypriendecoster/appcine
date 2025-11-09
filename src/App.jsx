@@ -6,6 +6,10 @@ import Search from "./pages/Search";
 import Navbar from "./components/Navbar";
 import Favorites from "./pages/Favorites";
 import Watchlist from "./pages/Watchlist";
+import Collection from "./pages/Collection";
+import AdvancedSearch from "./pages/AdvancedSearch";
+
+
 
 
 export default function App() {
@@ -19,9 +23,10 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
-            <Route path="/search" element={<Search />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/collection" element={<Collection />} />
+            <Route path="/search" element={<AdvancedSearch />} />
           </Routes>
         </div>
       </div>

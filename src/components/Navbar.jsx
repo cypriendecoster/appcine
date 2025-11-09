@@ -10,8 +10,7 @@ export default function Navbar() {
         { to: "/", label: "Accueil" },
         { to: "/movies", label: "Films" },
         { to: "/search", label: "Recherche" },
-        { to: "/favorites", label: "Favoris" },
-        { to: "/watchlist", label: "Watchlist" },
+        { to: "/collection", label: "Mes listes" },
     ];
 
     return (
