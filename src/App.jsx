@@ -4,6 +4,9 @@ import Movies from "./pages/Movies";
 import MovieDetails from "./pages/MovieDetails";
 import Search from "./pages/Search";
 import Navbar from "./components/Navbar";
+import Favorites from "./pages/Favorites";
+import Watchlist from "./pages/Watchlist";
+
 
 export default function App() {
   return (
@@ -17,6 +20,8 @@ export default function App() {
             <Route path="/movies" element={<Movies />} />
             <Route path="/movie/:id" element={<MovieDetails />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/watchlist" element={<Watchlist />} />
           </Routes>
         </div>
       </div>
