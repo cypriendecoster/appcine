@@ -21,7 +21,7 @@ export default function Home() {
           ))}
         </div>
       ) : (
-        <MovieCarousel title="Films Populaires 🔥" movies={popular || []} />
+        <MovieCarousel title="Films Populaires 🔥" movies={popular} loading={loadingPopular} />
       )}
 
       {loadingTop ? (
@@ -31,7 +31,7 @@ export default function Home() {
           ))}
         </div>
       ) : (
-        <MovieCarousel title="Mieux Notés ⭐" movies={topRated || []} />
+        <MovieCarousel title="Mieux Notés ⭐" movies={topRated} loading={loadingTop} />
       )}
     </div>
   );
