@@ -131,3 +131,49 @@ export async function getActorMovies(id) {
         };
     }
 }
+
+// Populaires par genre (équivalent "Trending" pour un genre)
+export async function getMoviesByGenre(genreId) {
+    try {
+        const res = await tmdb.get(`/discover/movie`, {
+            params: {
+                with_genres: genreId,
+                sort_by: "popularity.desc",
+            },
+        });
+        return { data: res.data.results, error: null };
+    } catch (err) {
+        return { data: null, error: err.response?.data?.status_message || "Erreur réseau" };
+    }
+}
+
+// Mieux notés par genre (on filtre un peu par vote_count pour éviter les faux top)
+export async function getTopRatedByGenre(genreId) {
+    try {
+        const res = await tmdb.get(`/discover/movie`, {
+            params: {
+                with_genres: genreId,
+                sort_by: "vote_average.desc",
+                "vote_count.gte": 200, // évite les films obscurs avec 5 votes
+            },
+        });
+        return { data: res.data.results, error: null };
+    } catch (err) {
+        return { data: null, error: err.response?.data?.status_message || "Erreur réseau" };
+    }
+}
+
+// Nouveautés (par date de sortie)
+export async function getNewReleasesByGenre(genreId) {
+    try {
+        const res = await tmdb.get(`/discover/movie`, {
+            params: {
+                with_genres: genreId,
+                sort_by: "release_date.desc",
+            },
+        });
+        return { data: res.data.results, error: null };
+    } catch (err) {
+        return { data: null, error: err.response?.data?.status_message || "Erreur réseau" };
+    }
+}

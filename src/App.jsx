@@ -7,6 +7,9 @@ import Watchlist from "./pages/Watchlist";
 import Collection from "./pages/Collection";
 import AdvancedSearch from "./pages/AdvancedSearch";
 import ActorDetails from "./pages/ActorDetails";
+import Genres from "./pages/Genres";
+import GenreDetails from "./pages/GenreDetails";
+
 
 export default function App() {
   return (
@@ -23,6 +26,8 @@ export default function App() {
             <Route path="/collection" element={<Collection />} />
             <Route path="/search" element={<AdvancedSearch />} />
             <Route path="/actor/:id" element={<ActorDetails />} />
+            <Route path="/genres" element={<Genres />} />
+            <Route path="/genre/:id" element={<GenreDetails />} />
           </Routes>
         </div>
       </div>

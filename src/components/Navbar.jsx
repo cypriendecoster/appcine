@@ -8,6 +8,7 @@ export default function Navbar() {
 
     const links = [
         { to: "/", label: "Accueil" },
+        { to: "/genres", label: "Genres" },
         { to: "/search", label: "Recherche" },
         { to: "/collection", label: "Mes listes" },
     ];
