@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Play, Heart, CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toggleStoredItem, isStored } from "../utils/storage";
+import { motion } from "framer-motion";
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, index = 0 }) {
     const [fav, setFav] = useState(false);
     const [watch, setWatch] = useState(false);
     const navigate = useNavigate();
@@ -14,35 +15,47 @@ export default function MovieCard({ movie }) {
     }, [movie.id]);
 
     const handleFav = (e) => {
-        e.stopPropagation(); // ✅ ne bloque plus le Link
+        e.stopPropagation();
         toggleStoredItem("favorites", movie);
         setFav(!fav);
     };
 
     const handleWatch = (e) => {
-        e.stopPropagation(); // ✅ ne bloque plus le Link
+        e.stopPropagation();
         toggleStoredItem("watchlist", movie);
         setWatch(!watch);
     };
 
     return (
-        <div
-            onClick={() => navigate(`/movie/${movie.id}`)} // ✅ clic card = ouvrir film
-            className="relative block transition-transform hover:scale-105 group cursor-pointer"
+        <motion.div
+            onClick={() => navigate(`/movie/${movie.id}`)}
+            className="relative block group cursor-pointer"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: Math.min(index * 0.03, 0.4), duration: 0.35, ease: "easeOut" }}
+            whileHover={{ scale: 1.05 }}
         >
+            {/* Poster */}
             <img
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                 alt={movie.title}
                 className="rounded-lg shadow-lg w-full h-full object-cover"
             />
 
+            {/* Overlay */}
             <div
                 className="
-          absolute inset-0 bg-black/80 opacity-0 
-          group-hover:opacity-100 transition 
-          flex flex-col justify-between rounded-lg p-3
+          absolute inset-0 
+          bg-black/80 
+          opacity-0 
+          group-hover:opacity-100 
+          transition 
+          flex flex-col justify-between
+          rounded-lg 
+          p-3
         "
             >
+                {/* Boutons favoris / watchlist */}
                 <div className="flex justify-end gap-2">
                     <button onClick={handleFav} title="Favoris">
                         <Heart
@@ -71,8 +84,9 @@ export default function MovieCard({ movie }) {
                     <p className="text-xs text-gray-300">⭐ {movie.vote_average.toFixed(1)}</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
+
 
 

@@ -8,7 +8,6 @@ export default function Navbar() {
 
     const links = [
         { to: "/", label: "Accueil" },
-        { to: "/movies", label: "Films" },
         { to: "/search", label: "Recherche" },
         { to: "/collection", label: "Mes listes" },
     ];
